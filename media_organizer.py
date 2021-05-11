@@ -72,4 +72,4 @@ def move_files(src_path, dst_path):
         dst_path1 = ""
 
 
-move_files("/home/twhid/Family/mom1", "/home/twhid/Family/dir")
+move_files(sys.argv[1], sys.argv[2])
