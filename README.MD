@@ -1,4 +1,5 @@
 #Media organizer written in python
+
 It is a simple program that organizes your images and videos
 by modification time.
 This program creates a folder for each modification time of files
