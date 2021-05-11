@@ -9,5 +9,6 @@ folder.
 You can run it in windows/mac/linux like:
 1. open cmd
 2. windows : $ python media_organizer.py src_folder_path dest_folder_path
+
    linux/mac : $ python3 media_organizer.py src_folder_path dest_folder_path
 3. click enter
