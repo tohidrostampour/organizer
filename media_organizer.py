@@ -2,6 +2,9 @@ import os
 import time
 import sys
 
+ext = {'videos':[".mp4", ".avi", ".3gp", ".mpeg", ".mkv", ".wmv", ".mov"],
+       'photos':[".jpg", ".jpeg", ".png"]}
+
 
 def get_time(path):
     modified = os.path.getmtime(path)
@@ -9,26 +12,22 @@ def get_time(path):
 
 
 def get_filename(path):
-    videos = [".mp4", ".avi", ".3gp", ".mpeg", ".mkv", ".wmv", ".mov"]
-    photos = [".jpg", ".jpeg", ".png"]
     for root, dirs, files in os.walk(path):
         for filename in files:
-            ext = os.path.splitext(filename)[-1].lower()
-            if ext in videos or ext in photos:
+            file_ext = os.path.splitext(filename)[-1].lower()
+            if ext in ext['videos'] or file_ext in ext['photos']:
                 return filename
 
 
 def locate_files(src_path):
-    videos = [".mp4", ".avi", ".3gp", ".mpeg", ".mkv", ".wmv", ".mov"]
-    photos = [".jpg", ".jpeg", ".png"]
     paths = []
     for root, dirs, files in os.walk(src_path):
         for filename in files:
-            ext = os.path.splitext(filename)[-1].lower()
-            if ext in videos:
+            file_ext = os.path.splitext(filename)[-1].lower()
+            if file_ext in ext['videos']:
                 file_path = os.path.join(root, filename)
                 paths.append((file_path, get_time(file_path), "videos"))
-            elif ext in photos:
+            elif file_ext in ext['photos']:
                 file_path = os.path.join(root, filename)
                 paths.append((file_path, get_time(file_path), "photos"))
     return paths
