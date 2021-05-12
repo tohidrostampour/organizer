@@ -17,3 +17,5 @@ You can run it in windows/mac/linux like:
    $ python3 media_organizer.py src_folder_path dest_folder_path
    ```
 3. click enter
+
+Actually this is my first project on github :).

@@ -2,8 +2,10 @@ import os
 import time
 import sys
 
-ext = {'videos':[".mp4", ".avi", ".3gp", ".mpeg", ".mkv", ".wmv", ".mov"],
-       'photos':[".jpg", ".jpeg", ".png"]}
+ext = {
+        'videos':[".mp4", ".avi", ".3gp", ".mpeg", ".mkv", ".wmv", ".mov"],
+        'photos':[".jpg", ".jpeg", ".png"]
+        }
 
 
 def get_time(path):
@@ -65,10 +67,17 @@ def make_sub_dir(main_dir, paths):
 
 def move_files(src_path, dst_path):
     paths = locate_files(src_path)
-    for pth in paths:
-        dst_path1 = make_sub_dir(make_main_dir(dst_path, pth), pth)
-        os.rename(pth[0], os.path.join(os.path.join(dst_path1, get_filename(src_path))))
-        dst_path1 = ""
+    if is_dir(dst_path):
+        for pth in paths:
+            dst_path1 = make_sub_dir(make_main_dir(dst_path, pth), pth)
+            os.link(pth[0], os.path.join(dst_path1, os.path.basename(pth[0])))
+            dst_path1 = ""
+    else:
+        os.mkdir(dst_path)
+        for pth in paths:
+            dst_path1 = make_sub_dir(make_main_dir(dst_path, pth), pth)
+            os.link(pth[0], os.path.join(dst_path1, os.path.basename(pth[0])))
+            dst_path1 = ""
 
 
 move_files(sys.argv[1], sys.argv[2])
